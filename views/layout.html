@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/schedule.css">
+    {% block style %} {% endblock %}
+  </head>
+
+  <body class="white">
+    <div>
+
+      {% block content %} {% endblock %}
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    {% block script %} {% endblock %}
+  </body>
+</html>
