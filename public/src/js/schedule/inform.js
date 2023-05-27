@@ -2713,6 +2713,9 @@ async function initData(f) {
   await axios.get("/schedule/inform").then((res) => {
     list2 = res.data.list2;
     list4 = res.data.list4;
+    teacher = res.data.teacher;
+    student = res.data.student;
+    console.log(list2, list4, teacher, student);
     f();
   });
 }

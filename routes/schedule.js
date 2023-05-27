@@ -39,6 +39,9 @@ const firstSheet = excelFile.Sheets[sheetName]; // @details 시트의 제목 추
 const sheetName2 = excelFile.SheetNames[1]; // @details 첫번째 시트 정보 추출
 const secondSheet = excelFile.Sheets[sheetName2]; // @details 시트의 제목 추출
 
+const sheetName3 = excelFile.SheetNames[2]; // @details 첫번째 시트 정보 추출
+const thirdSheet = excelFile.Sheets[sheetName3]; // @details 시트의 제목 추출
+
 // @details 엑셀 파일의 첫번째 시트를 읽어온다.
 
 const jsonData = xlsx.utils.sheet_to_json(firstSheet, {
@@ -47,10 +50,23 @@ const jsonData = xlsx.utils.sheet_to_json(firstSheet, {
 const jsonData2 = xlsx.utils.sheet_to_json(secondSheet, {
   defval: "",
 });
+const jsonData3 = xlsx.utils.sheet_to_json(thirdSheet, {
+  defval: "",
+});
+getInform();
 function getInform() {
   const list2 = {};
   const list4 = {};
+  const student = {};
+  const teacher = {};
 
+  Object.values(jsonData3).forEach((el) => {
+    Object.keys(el).forEach((key) => {
+      if (Number(key) % 2 == 1 && el[key]) {
+        teacher[el[key]] = el[`${Number(key) + 1}`];
+      }
+    });
+  });
   Object.values(jsonData2).forEach((el) => {
     const temp = {};
 
@@ -79,7 +95,15 @@ function getInform() {
     if (number.length == 4)
       number = number[0] + "0" + number[1] + number[2] + number[3];
     list4[number] = temp;
+
+    student[number] = el["이름"];
   });
-  return { list2, list4 };
+
+  Object.keys(list4).forEach((el) => {
+    Object.keys(list4[el]).forEach((h) => {
+      if (h == "이름") student[el] = list4[el][h];
+    });
+  });
+  return { list2, list4, student, teacher };
 }
 module.exports = router;
