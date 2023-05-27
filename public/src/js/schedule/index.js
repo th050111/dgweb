@@ -184,7 +184,7 @@ function whoTeacher(sub, set) {
 
 const remainTime = document.querySelector("#hi");
 
-let temp;
+let temp; //
 let myung;
 
 fetch("https://api.qwer.pw/request/hangang_temp?apikey=guest")
