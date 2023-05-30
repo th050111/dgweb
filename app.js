@@ -5,6 +5,23 @@ const path = require("path");
 const morgan = require("morgan");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
+const firebase = require("./firebase");
+const firebase2 = require("firebase/app");
+const { getStorage, ref } = require("firebase/storage");
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBvOOW0Nplg6WWpQgweao50kbhX2XqeQ9Q",
+  authDomain: "dgweb-9074c.firebaseapp.com",
+  databaseURL:
+    "https://dgweb-9074c-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dgweb-9074c",
+  storageBucket: "dgweb-9074c.appspot.com",
+  messagingSenderId: "868328916807",
+  appId: "1:868328916807:web:cc0c94b305f0b279f0ae62",
+};
+
+firebase2.initializeApp(firebaseConfig);
+const storage = getStorage();
 
 dotenv.config(); //env파일
 const adminRouter = require("./routes/admin");
