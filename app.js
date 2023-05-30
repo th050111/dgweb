@@ -9,10 +9,10 @@ const dotenv = require("dotenv");
 dotenv.config(); //env파일
 const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
+const apiRouter = require("./routes/api");
 const homeRouter = require("./routes/home.js");
 const scheduleRouter = require("./routes/schedule");
 const { isNotLoggedIn, isLoggedIn } = require("./routes/middlewares");
-
 
 const app = express();
 
@@ -40,13 +40,13 @@ app.use(
   })
 );
 
-
 app.use((req, res, next) => {
   next();
 });
 app.use("/user", userRouter);
 app.use("/home", homeRouter);
-app.use("/schedule", scheduleRouter)
+app.use("/api", apiRouter);
+app.use("/schedule", scheduleRouter);
 app.use("/admin", adminRouter);
 app.use("/", (req, res) => {
   return res.redirect("/home");
