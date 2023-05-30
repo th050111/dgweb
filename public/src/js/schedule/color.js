@@ -6,7 +6,10 @@ let op = Number(localStorage.getItem("op")) || 100;
 let backCode = Number(localStorage.getItem("back-code")) || 0;
 
 if (preList4 && preList2) {
-  coloring(preList4, preList2);
+  console.log(preList2, preList4);
+  window.onload = () => {
+    coloring(preList4, preList2);
+  };
   const inputList4 = document.querySelectorAll(".set4-ul input[type='text']");
   const inputList2 = document.querySelectorAll(".set2-ul input[type='text']");
   console.log(inputList4);
@@ -105,6 +108,7 @@ form.addEventListener("submit", (el) => {
   }
 });
 function coloring(color4List, color2List) {
+  console.log("hi");
   document.querySelectorAll(".bch").forEach((el) => {
     if (!isNaN(Number(op)) && op <= 100 && op >= 20)
       el.style.opacity = op / 100.0;
