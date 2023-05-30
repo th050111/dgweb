@@ -3,6 +3,7 @@ const form = document.querySelector("form.option-form");
 const preList4 = JSON.parse(localStorage.getItem("list4"));
 const preList2 = JSON.parse(localStorage.getItem("list2"));
 let op = Number(localStorage.getItem("op")) || 100;
+let backCode = Number(localStorage.getItem("back-code")) || 0;
 
 if (preList4 && preList2) {
   coloring(preList4, preList2);
@@ -16,12 +17,26 @@ if (preList4 && preList2) {
   inputList2.forEach((el, i) => {
     el.value = preList2[i];
   });
-  console.log(inputList4);
+}
+if (op) {
+  document.querySelector("input[name='op']").value = op;
+}
+if (backCode !== undefined) {
+  document.querySelector("input[name='backCode']").value = backCode;
 }
 
 form.addEventListener("submit", (el) => {
   op = el.target.op.value;
   localStorage.setItem("op", op);
+  const code = el.target.backCode.value;
+  axios.get(`/api/backUrl?code=${code}`).then((res) => {
+    localStorage.setItem("back-code", code);
+    const url = res.data.url;
+    if (url) {
+      localStorage.setItem("back-url", url);
+      document.querySelector("#back").style.backgroundImage = `url(${url})`;
+    }
+  });
   const colorList = {
     red: "#FF0000",
     purple: "#7F00FF",

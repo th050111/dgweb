@@ -8,14 +8,17 @@ const schedule = [
   ["E", "D", "B", "E", "창"],
 ];
 let number = localStorage.getItem("number") | "";
-
 (function () {
   initData(() => {
-    console.log("hi");
     if (list4[number]) {
+      const backUrl = localStorage.getItem("back-url");
+
+      console.log(backUrl);
       draw();
-      document.querySelector("#back").style.backgroundImage =
-        "url(" + "img/" + number + ".jpg" + ")";
+      if (backUrl)
+        document.querySelector(
+          "#back"
+        ).style.backgroundImage = `url(${backUrl})`;
     }
   });
 })();

@@ -767,6 +767,10 @@
                 투명도(1~100):
                 <input type="text" name="op" style="width: 60px" />
               </li>
+              <li>
+                코드(학번+3자리숫자):
+                <input type="text" name="backCode" style="width: 60px" />
+              </li>
             </ul>
             <div style="width: 50px"></div>
           </div>
@@ -774,6 +778,12 @@
             >on:<input type="radio" value="on" name="on" /></label
           ><label>off:<input type="radio" value="off" name="on" /></label>
           <input type="submit" value="확인" />
+        </form>
+        <form action="/api/back" method="post" enctype="multipart/form-data">
+          <label for="img"></label>
+          <input type="file" id="image" name="image" , accept="image/*" />
+          <input type="number" id="code" name="code" />
+          <input type="submit" value="제출" />
         </form>
       </div>
     </div>

@@ -2,7 +2,14 @@ const express = require("express");
 const path = require("path");
 const multer = require("multer");
 const firebase2 = require("firebase/app");
-const { getStorage, ref, uploadBytes } = require("firebase/storage");
+const {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  getBlob,
+  getStream,
+} = require("firebase/storage");
 
 const firebaseConfig = {
   apiKey: "AIzaSyBvOOW0Nplg6WWpQgweao50kbhX2XqeQ9Q",
@@ -15,37 +22,57 @@ const firebaseConfig = {
   appId: "1:868328916807:web:cc0c94b305f0b279f0ae62",
 };
 
+const imgList = {};
+
 firebase2.initializeApp(firebaseConfig);
 const storageDb = getStorage();
 
 const router = express.Router();
+
 const storage = multer.memoryStorage({
   destination: (req, file, cb) => {
     // 파일이 업로드될 경로 설정
     cb(null, "public/img/");
   },
   filename: (req, file, cb) => {
+    console.log(file.originalname);
     // timestamp를 이용해 새로운 파일명 설정
-    let newFileName = "a.jpg"; //new Date().valueOf() + path.extname(file.originalname);
+    let newFileName = new Date().valueOf() + path.extname(file.originalname);
     cb(null, newFileName);
+    req.name = newFileName;
   },
 });
-
 const uploadFiles = multer({
   storage: storage,
 });
 
 router.post("/back", uploadFiles.single("image"), (req, res) => {
   const { file } = req;
-  console.log(file);
-  const storageRef = ref(storageDb, "a");
+  const code = req.body.code;
+  console.log(req.name);
+  const storageRef = ref(storageDb, `back/${code}.jpg`);
 
   uploadBytes(storageRef, file.buffer).then((snapshot) => {
     console.log("complete!!");
   });
-  return res.send({
-    title: "메인 홈페이지",
-  });
+  console.log(code);
+  return res.redirect("/schedule");
+});
+
+router.get("/backUrl", (req, res) => {
+  const code = req.query.code;
+
+  getDownloadURL(ref(storageDb, `back/${code}.jpg`))
+    .then((url) => {
+      res.json({
+        url,
+      });
+    })
+    .catch((error) => {
+      res.json({
+        url: "",
+      });
+    });
 });
 
 module.exports = router;

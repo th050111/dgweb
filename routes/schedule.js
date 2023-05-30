@@ -95,7 +95,6 @@ function getInform() {
     if (number.length == 4)
       number = number[0] + "0" + number[1] + number[2] + number[3];
     list4[number] = temp;
-
     student[number] = el["이름"];
   });
 
