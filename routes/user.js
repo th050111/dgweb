@@ -3,12 +3,12 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
-router.get("/login", isNotLoggedIn, async (req, res) => {
+router.get("/login", async (req, res) => {
   res.render("user/login", {
     title: "로그인 페이지",
   });
 });
-router.get("/register", isNotLoggedIn, (req, res) => {
+router.get("/register", (req, res) => {
   res.render("user/register", {
     title: "회원가입 홈페이지",
   });
