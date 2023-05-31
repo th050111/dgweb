@@ -1,4 +1,5 @@
 const express = require("express");
+const api = require("./api");
 
 const router = express.Router();
 
@@ -10,7 +11,9 @@ router.get("/", (req, res) => {
 
 router.get("/inform", (req, res) => {
   console.log("inform");
-  res.json(getInform());
+  api.getUrl("snack/snack", (snackUrl) => {
+    res.json({ ...getInform(), snackUrl });
+  });
 });
 
 /*

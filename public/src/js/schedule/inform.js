@@ -2716,6 +2716,9 @@ async function initData(f) {
     // teacher = res.data.teacher;
     // student = res.data.student;
     // console.log(list2, list4, teacher, student);
+    const snackUrl = res.data.snackUrl;
+    console.log(snackUrl);
+    document.querySelector("#snackImg").src = snackUrl;
     f();
   });
 }

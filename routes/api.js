@@ -58,6 +58,17 @@ router.post("/back", uploadFiles.single("image"), (req, res) => {
   console.log(code);
   return res.redirect("/schedule");
 });
+router.post("/snack", uploadFiles.single("image"), (req, res) => {
+  const { file } = req;
+  //   const code = req.body.code;
+  const storageRef = ref(storageDb, `snack/snack.jpg`);
+
+  uploadBytes(storageRef, file.buffer).then((snapshot) => {
+    console.log("complete!!");
+  });
+
+  return res.redirect("/admin");
+});
 
 router.get("/backUrl", (req, res) => {
   const code = req.query.code;
@@ -74,5 +85,18 @@ router.get("/backUrl", (req, res) => {
       });
     });
 });
+
+router.getUrl = (name, f) => {
+  console.log(name);
+  getDownloadURL(ref(storageDb, `${name}.jpg`))
+    .then((url) => {
+      f(url);
+      return url;
+    })
+    .catch((error) => {
+      f(url);
+      return false;
+    });
+};
 
 module.exports = router;
