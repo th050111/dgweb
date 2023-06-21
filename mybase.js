@@ -12,7 +12,4 @@ const database = admin.database();
 
 const db = firestore.getFirestore();
 
-db.collection("cities").doc("LA2").set({
-  hi: 1,
-});
-module.exports = database;
+module.exports = db;

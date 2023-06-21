@@ -210,18 +210,6 @@ fetch("https://api.qwer.pw/request/helpful_text?apikey=guest")
   });
 
 function diffDay() {
-  let masTime = new Date("2023-3-23");
-  if (number == 30507) {
-    masTime = new Date("2023-7-31");
-  }
-  const todayTime = new Date();
-
-  let diff = masTime - todayTime;
-  if (diff < 0) {
-    masTime = new Date("2023-6-01");
-    diff = masTime - todayTime;
-  }
-
   const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24));
   const diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const diffMin = Math.floor((diff / (1000 * 60)) % 60);
@@ -231,7 +219,7 @@ function diffDay() {
   if (number == 30507) {
     remainTime.innerText = `사관까지 ${diffDay}일${diffHour}시간${diffMin}분${diffSec}초`;
   } else {
-    remainTime.innerText = `6모까지 ${diffDay}일${diffHour}시간${diffMin}분${diffSec}초 // 오늘의 온도는 ${temp}ºC.....`;
+    remainTime.innerText = `${diffName}까지 ${diffDay}일${diffHour}시간${diffMin}분${diffSec}초 // 오늘의 온도는 ${temp}ºC.....`;
   }
 }
 

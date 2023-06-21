@@ -6,6 +6,12 @@
   <input type="submit" value="제출" />
 </form>
 
+<form action="schedule/inform" method="post">
+  <input type="text" id="dDayName" name="dDayName" placeholder="이름" />
+  <input type="text" id="dDay" name="dDay" />
+  <input type="submit" value="제출" />
+</form>
+
 {%endblock%} {% block script %}
 <script>
   function getSchedule() {

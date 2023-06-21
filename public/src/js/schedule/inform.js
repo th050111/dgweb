@@ -2709,6 +2709,9 @@ let student = {
   30818: "한결",
 };
 
+let diffName;
+let diff;
+
 async function initData(f) {
   await axios.get("/schedule/inform").then((res) => {
     // list2 = res.data.list2;
@@ -2717,7 +2720,13 @@ async function initData(f) {
     // student = res.data.student;
     // console.log(list2, list4, teacher, student);
     const snackUrl = res.data.snackUrl;
-    console.log(snackUrl);
+    const dDay = res.data.dDay.day;
+    let masTime = new Date(dDay);
+    const todayTime = new Date();
+    diffName = res.data.dDay.name;
+
+    diff = masTime - todayTime;
+
     document.querySelector("#snackImg").src = snackUrl;
     f();
   });

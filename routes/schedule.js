@@ -1,5 +1,15 @@
 const express = require("express");
 const api = require("./api");
+const db = require("../mybase");
+
+let dDay;
+
+db.collection("schedule")
+  .doc("inform")
+  .get()
+  .then((snap) => {
+    dDay = { day: snap.data().dDay, name: snap.data().dDayName };
+  });
 
 const router = express.Router();
 
@@ -12,7 +22,7 @@ router.get("/", (req, res) => {
 router.get("/inform", (req, res) => {
   console.log("inform");
   api.getUrl("snack/snack", (snackUrl) => {
-    res.json({ ...getInform(), snackUrl });
+    res.json({ ...getInform(), snackUrl, dDay });
   });
 });
 
