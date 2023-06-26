@@ -6,6 +6,12 @@
   <input type="submit" value="제출" />
 </form>
 
+<form action="/api/notice" method="post" enctype="multipart/form-data">
+  <label for="img"></label>
+  <input type="file" id="notice" name="notice" , accept="image/*" />
+  <input type="submit" value="제출" />
+</form>
+
 <form action="schedule/inform" method="post">
   <input type="text" id="dDayName" name="dDayName" placeholder="이름" />
   <input type="text" id="dDay" name="dDay" />

@@ -2720,6 +2720,7 @@ async function initData(f) {
     // student = res.data.student;
     // console.log(list2, list4, teacher, student);
     const snackUrl = res.data.snackUrl;
+    const notUrl = res.data.noUrl;
     const dDay = res.data.dDay.day;
     let masTime = new Date(dDay);
     const todayTime = new Date();
@@ -2728,6 +2729,7 @@ async function initData(f) {
     diff = masTime - todayTime;
 
     document.querySelector("#snackImg").src = snackUrl;
+    document.querySelector("#notImg").src = notUrl;
     f();
   });
 }

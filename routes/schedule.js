@@ -22,7 +22,9 @@ router.get("/", (req, res) => {
 router.get("/inform", (req, res) => {
   console.log("inform");
   api.getUrl("snack/snack", (snackUrl) => {
-    res.json({ ...getInform(), snackUrl, dDay });
+    api.getUrl("notice/notice", (noUrl) => {
+      res.json({ ...getInform(), noUrl, snackUrl, dDay });
+    });
   });
 });
 

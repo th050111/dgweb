@@ -69,6 +69,17 @@ router.post("/snack", uploadFiles.single("image"), (req, res) => {
 
   return res.redirect("/admin");
 });
+router.post("/notice", uploadFiles.single("notice"), (req, res) => {
+  const { file } = req;
+  //   const code = req.body.code;
+  const storageRef = ref(storageDb, `notice/notice.jpg`);
+
+  uploadBytes(storageRef, file.buffer).then((snapshot) => {
+    console.log("complete!!");
+  });
+
+  return res.redirect("/admin");
+});
 
 router.get("/backUrl", (req, res) => {
   const code = req.query.code;
