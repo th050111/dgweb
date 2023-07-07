@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      td,
+      th {
+        align-content: center;
+        text-align: center;
+        cursor: pointer;
+      }
+      table.own td {
+        width: 100px;
+        height: 40px;
+      }
+      table.own th {
+        width: 100px;
+        height: 40px;
+      }
+      td.none {
+        background-color: gray;
+      }
+      td.forbid {
+        background-color: gray;
+      }
+      td.choice {
+        background-color: rgb(170, 233, 164);
+      }
+      td.limit {
+        background-color: #d1d8e0;
+      }
+      td.order {
+        background-color: #fc7a7a;
+      }
+      .reset-btn {
+        width: 100px;
+        height: 60px;
+        line-height: 60px;
+        background-color: gray;
+        text-align: center;
+        cursor: pointer;
+        float: right;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex">
+      <div>
+        <div style="display: flex">
+          <form>
+            <input
+              autocomplete="off"
+              type="text"
+              name="number"
+              placeholder="(학번 또는 이름)을 입력하세요...."
+            />
+          </form>
+          <div id="hi" style="margin-left: 10px; color: red"></div>
+        </div>
+
+        <div class="bch" style="width: fit-content">
+          학번: <span class="name"></span>
+        </div>
+        <br />
+        <div>
+          <table border="1" class="own second">
+            <th>2학년</th>
+            <th>1학기</th>
+            <th>2학기</th>
+            <tr class="mainS">
+              <td>국영수</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="scienceS">
+              <td rowspan="2">탐구</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="scienceS">
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="languageS">
+              <td>제2외국어</td>
+              <td colspan="2"></td>
+              <td style="display: none">a</td>
+            </tr>
+            <tr class="cultureS">
+              <td>교양</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <table border="1" class="own third">
+            <th>3학년</th>
+            <th>1학기</th>
+            <th>2학기</th>
+            <tr class="mainS">
+              <td rowspan="4">국영수</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="mainS">
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="mainS">
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="mainS">
+              <td class="none"></td>
+              <td></td>
+            </tr>
+            <tr class="scienceS">
+              <td rowspan="2">탐구</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="scienceS">
+              <td></td>
+              <td class="none"></td>
+            </tr>
+            <tr class="languageS" style="font-size: 13px">
+              <td>제2외국어/기술</td>
+              <td colspan="2"></td>
+              <td style="display: none">a</td>
+            </tr>
+            <tr class="artS">
+              <td>예체능</td>
+              <td colspan="2"></td>
+              <td style="display: none">a</td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <span style="color: rgb(70, 216, 70)">초록색: 선택한 과목</span><br />
+          <span style="color: red">빨간색: 위계상 불가능</span><br />
+          <span style="color: gray">연회색: 개수 제한</span>
+          <br /><br />
+          <span style="color: red; font-weight: bolder"
+            >비정상적인 행동은 자제해주세요</span
+          ><br />
+        </div>
+      </div>
+      <div style="margin-right: 50px; margin-left: 50px">
+        <table border="1" class="choose second">
+          <th>2학년</th>
+          <th>1학기</th>
+          <th>2학기</th>
+          <div class="mainS">
+            <tr class="mainS">
+              <td rowspan="7">국영수</td>
+              <td>고전읽기</td>
+              <td>고전읽기</td>
+            </tr>
+            <tr class="mainS">
+              <td>진로영어</td>
+              <td>진로영어</td>
+            </tr>
+            <tr class="mainS">
+              <td>기하</td>
+              <td>기하</td>
+            </tr>
+            <tr class="mainS">
+              <td>영미문학</td>
+              <td>영미문학</td>
+            </tr>
+            <tr class="mainS">
+              <td class="none"></td>
+              <td>확통</td>
+            </tr>
+            <tr class="mainS">
+              <td class="none"></td>
+              <td>심화영어</td>
+            </tr>
+            <tr class="mainS">
+              <td class="none"></td>
+              <td>심화국어</td>
+            </tr>
+          </div>
+
+          <div class="science">
+            <tr class="scienceS">
+              <td rowspan="18">탐구</td>
+              <td>한국지리</td>
+              <td>한국지리</td>
+            </tr>
+            <tr class="scienceS">
+              <td>정치와법</td>
+              <td>정치와법</td>
+            </tr>
+            <tr class="scienceS">
+              <td>사회문화</td>
+              <td>사회문화</td>
+            </tr>
+            <tr class="scienceS">
+              <td>생활과윤리</td>
+              <td>생활과윤리</td>
+            </tr>
+            <tr class="scienceS">
+              <td>세계지리</td>
+              <td>세계지리</td>
+            </tr>
+            <tr class="scienceS">
+              <td>세계사</td>
+              <td>세계사</td>
+            </tr>
+            <tr class="scienceS">
+              <td>윤리와사상</td>
+              <td>윤리와사상</td>
+            </tr>
+            <tr class="scienceS">
+              <td>경제</td>
+              <td>경제</td>
+            </tr>
+            <tr class="scienceS">
+              <td class="none" style="color: gray">none</td>
+              <td class="none" style="color: gray">none</td>
+            </tr>
+            <tr class="scienceS">
+              <td>물리학Ⅰ</td>
+              <td>물리학Ⅰ</td>
+            </tr>
+            <tr class="scienceS">
+              <td>화학Ⅰ</td>
+              <td>화학Ⅰ</td>
+            </tr>
+            <tr class="scienceS">
+              <td>생명과학Ⅰ</td>
+              <td>생명과학Ⅰ</td>
+            </tr>
+            <tr class="scienceS">
+              <td>지구과학Ⅰ</td>
+              <td>지구과학Ⅰ</td>
+            </tr>
+            <tr class="scienceS">
+              <td>정보과학</td>
+              <td>정보과학</td>
+            </tr>
+            <tr class="scienceS">
+              <td class="none"></td>
+              <td>물리학Ⅱ</td>
+            </tr>
+            <tr class="scienceS">
+              <td class="none"></td>
+              <td>화학Ⅱ</td>
+            </tr>
+            <tr class="scienceS">
+              <td class="none"></td>
+              <td>생명과학Ⅱ</td>
+            </tr>
+            <tr class="scienceS">
+              <td class="none"></td>
+              <td>지구과학Ⅱ</td>
+            </tr>
+          </div>
+          <div class="language">
+            <tr class="languageS">
+              <td rowspan="2">제2외국어</td>
+              <td colspan="2" class="two">일본어</td>
+            </tr>
+            <tr class="languageS">
+              <td colspan="2" class="two">중국어</td>
+            </tr>
+            <tr class="cultureS">
+              <td rowspan="6">교양</td>
+              <td>논술</td>
+              <td>논술</td>
+            </tr>
+            <tr class="cultureS">
+              <td>교육학</td>
+              <td>교육학</td>
+            </tr>
+            <tr class="cultureS">
+              <td>심리학</td>
+              <td>심리학</td>
+            </tr>
+            <tr class="cultureS">
+              <td>철학</td>
+              <td>철학</td>
+            </tr>
+            <tr class="cultureS">
+              <td>인공지능기초</td>
+              <td>인공지능기초</td>
+            </tr>
+            <tr class="cultureS">
+              <td>프로그래밍</td>
+              <td>프로그래밍</td>
+            </tr>
+          </div>
+        </table>
+      </div>
+      <div>
+        <table border="1" class="choose third">
+          <th>3학년</th>
+          <th>1학기</th>
+          <th>2학기</th>
+          <div class="mainS">
+            <tr class="mainS">
+              <td rowspan="7">국영수</td>
+              <td>언어와매체</td>
+              <td>문학과매체</td>
+            </tr>
+            <tr class="mainS">
+              <td>화법과작문</td>
+              <td>심화수학Ⅰ</td>
+            </tr>
+            <tr class="mainS">
+              <td>심화국어</td>
+              <td>수학과제탐구</td>
+            </tr>
+            <tr class="mainS">
+              <td>확통</td>
+              <td>정보처리관리</td>
+            </tr>
+            <tr class="mainS">
+              <td>미적분</td>
+              <td>영어권문화</td>
+            </tr>
+            <tr class="mainS">
+              <td>영독작</td>
+              <td>심화영독Ⅰ</td>
+            </tr>
+            <tr class="mainS">
+              <td>심화영어</td>
+              <td class="none"></td>
+            </tr>
+          </div>
+
+          <div class="science">
+            <tr class="scienceS">
+              <td rowspan="14">과탐</td>
+              <td>빅데이터분석</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>물리학Ⅰ</td>
+              <td>사회과제연구</td>
+            </tr>
+            <tr class="scienceS">
+              <td>화학Ⅰ</td>
+              <td>융합과학</td>
+            </tr>
+            <tr class="scienceS">
+              <td>생명과학Ⅰ</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>지구과학Ⅰ</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>물리학Ⅱ</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>화학Ⅱ</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>생명과학Ⅱ</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>지구과학Ⅱ</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>과학과제연구</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>사회문제탐구</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>지역이해</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>고전과윤리</td>
+              <td class="none"></td>
+            </tr>
+            <tr class="scienceS">
+              <td>현대세계의변화</td>
+              <td class="none"></td>
+            </tr>
+          </div>
+          <div class="language">
+            <tr class="languageS">
+              <td rowspan="3">제2외국어</td>
+              <td colspan="2" class="two">일본문화</td>
+            </tr>
+            <tr class="languageS">
+              <td colspan="2" class="two">중국문화</td>
+            </tr>
+            <tr class="languageS">
+              <td colspan="2" class="two">데이터과학과머신러닝</td>
+            </tr>
+            <tr class="artS">
+              <td rowspan="2" class="two">예체능</td>
+              <td colspan="2" class="two">음악감상과비평</td>
+            </tr>
+            <tr class="artS">
+              <td colspan="2" class="two">미술감상과비평</td>
+            </tr>
+          </div>
+        </table>
+        <div class="reset-btn" onclick="submit()">제출</div>
+      </div>
+    </div>
+
+    <form action="/choose" method="post" id="choose-form">
+      <input type="text" hidden name="choose" id="choose-input" />
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      const student = {
+        10101: "권태홍",
+        10102: "김동욱",
+        10103: "김민기",
+        10104: "김윤환",
+        10105: "김준우",
+        10106: "김찬솔",
+        10107: "문수윤",
+        10108: "박성욱",
+        10109: "신영섭",
+        10110: "신윤섭",
+        10111: "심승현",
+        10112: "오명보",
+        10113: "유선민",
+        10114: "이경수",
+        10115: "이승환",
+        10116: "이정빈",
+        10117: "이현승",
+        10118: "장서진",
+        10119: "전소율",
+        10120: "정대한",
+        10121: "지희망",
+        10122: "현석환",
+        10201: "김성수",
+        10202: "김용경",
+        10203: "김원민",
+        10204: "김지훈",
+        10205: "노현",
+        10206: "박상빈",
+        10207: "박정인",
+        10208: "백승",
+        10209: "성태경",
+        10210: "신승우",
+        10211: "안호현",
+        10212: "양승준",
+        10213: "오현석",
+        10214: "유영운",
+        10215: "이윤호",
+        10216: "이주성",
+        10217: "이현민",
+        10218: "정찬휘",
+        10219: "천세민",
+        10220: "최영재",
+        10221: "한슬",
+        10222: "현지호",
+        10301: "고민석",
+        10302: "김덕영",
+        10303: "김두현",
+        10304: "김영석",
+        10305: "김영욱",
+        10306: "김재율",
+        10307: "김재준",
+        10308: "김태현",
+        10309: "김현빈",
+        10310: "노규민",
+        10311: "명준휘",
+        10312: "손정후",
+        10313: "송나한",
+        10314: "송원석",
+        10315: "오택민",
+        10316: "이상인",
+        10317: "이현민",
+        10318: "정민준",
+        10319: "정찬규",
+        10320: "조성범",
+        10321: "조진영",
+        10322: "한태양",
+        10401: "김재윤",
+        10402: "김효준",
+        10403: "노승준",
+        10404: "문연찬",
+        10405: "박상후",
+        10406: "박진용",
+        10407: "손세찬",
+        10408: "송주홍",
+        10409: "신이수",
+        10410: "신한주",
+        10411: "오태환",
+        10412: "유인",
+        10413: "임채진",
+        10414: "전경인",
+        10415: "전시민",
+        10416: "전이환",
+        10417: "정해성",
+        10418: "조인호",
+        10419: "천정민",
+        10420: "홍바울",
+        10421: "황태경",
+        10501: "곽민성",
+        10502: "김건호",
+        10503: "김도현",
+        10504: "김선민",
+        10505: "김승호",
+        10506: "김지훈",
+        10507: "문지민",
+        10508: "박동주",
+        10509: "박상민",
+        10510: "백창하",
+        10511: "송영창",
+        10512: "염정빈",
+        10513: "윤태현",
+        10514: "이김예성",
+        10515: "이영웅",
+        10516: "이윤성",
+        10517: "장예준",
+        10518: "전요한",
+        10519: "최준혁",
+        10520: "한윤우",
+        10521: "황석하",
+        10601: "강명규",
+        10602: "구본성",
+        10603: "김도훈",
+        10604: "김민호",
+        10605: "김준규",
+        10606: "김진영",
+        10607: "박건우",
+        10608: "변영진",
+        10609: "오현석",
+        10610: "우지헌",
+        10611: "위주환",
+        10612: "유현우",
+        10613: "이용은",
+        10615: "이희찬",
+        10616: "정상연",
+        10617: "최용훈",
+        10618: "최윤서",
+        10619: "최윤주",
+        10620: "최이레",
+        10621: "최지호",
+        10701: "강수환",
+        10702: "권석진",
+        10703: "김세연",
+        10704: "김영범",
+        10705: "민시홍",
+        10706: "박재현",
+        10707: "박한수",
+        10708: "서성협",
+        10709: "서현철",
+        10710: "이어진",
+        10711: "이예찬",
+        10712: "이하윤",
+        10713: "정은찬",
+        10714: "정찬민",
+        10715: "정현민",
+        10716: "조범서",
+        10717: "조영민",
+        10718: "차민혁",
+        10719: "최영조",
+        10720: "최현수",
+        10721: "한석호",
+        10801: "김민세",
+        10802: "김민창",
+        10803: "김성준",
+        10804: "김주혁",
+        10805: "김회창",
+        10806: "민상준",
+        10807: "박하준",
+        10808: "서범수",
+        10809: "서지환",
+        10810: "서찬",
+        10811: "손범수",
+        10813: "엄희성",
+        10814: "우기범",
+        10815: "이진욱",
+        10816: "이찬영",
+        10817: "이희찬",
+        10818: "조민성",
+        10819: "천세범",
+        10820: "최성주",
+        10821: "홍유찬",
+        0: "입력해주세요",
+      };
+    </script>
+    <script>
+      let choice = JSON.parse(localStorage.getItem("choice"));
+      let number = localStorage.getItem("number") | "";
+      document.querySelector(".name").innerHTML =
+        number + " / 이름: " + student[number];
+      console.log(choice);
+
+      document.querySelector("form").addEventListener("submit", (el) => {
+        el.preventDefault();
+        number = el.target.number.value;
+        if (!isNaN(Number(number)) && number.length == 4)
+          number = number[0] + "0" + number[1] + number[2] + number[3];
+
+        if (!student[number]) {
+          const a = Object.keys(student).filter((el) => {
+            return student[el] == number;
+          });
+          if (a[0]) number = a[0];
+          else return;
+        }
+        localStorage.setItem("number", number);
+        save();
+        document.querySelector(".name").innerHTML =
+          number + " / 이름: " + student[number];
+      });
+      const a = document.querySelectorAll("table.choose.second tr");
+      const a2 = document.querySelectorAll("table.choose.third tr");
+      const limit = {
+        languageS21: 1,
+        languageS31: 1,
+        scienceS21: 2,
+        scienceS22: 2,
+        scienceS31: 2,
+        scienceS32: 1,
+        cultureS21: 1,
+        cultureS22: 1,
+        artS31: 1,
+        mainS21: 1,
+        mainS22: 1,
+        mainS31: 3,
+        mainS32: 4,
+      };
+
+      const order = {
+        물리학Ⅱ: ["물리학Ⅰ"],
+        생명과학Ⅱ: ["생명과학Ⅰ"],
+        지구과학Ⅱ: ["지구과학Ⅰ"],
+        화학Ⅱ: ["화학Ⅰ"],
+        지역이해: ["한국지리", "세계지리"],
+        고전과윤리: ["윤리와사상", "생활과윤리"],
+        현대세계의변화: ["세계사"],
+        과학과제연구: ["물리학Ⅱ", "생명과학Ⅱ", "화학Ⅱ", "지구과학Ⅱ"],
+        사회문제탐구: ["사회문화", "경제", "정치와법"],
+      };
+
+      if (!choice) choiceInit(false);
+      else choiceInit(true);
+      function choiceInit(init) {
+        if (!choice) choice = {};
+        a.forEach((el) => {
+          const c = el.querySelectorAll("td");
+          const b = [0, 0];
+
+          if (c[2]) {
+            b[0] = c[1];
+            b[1] = c[2];
+          } else if (c[1] && c[1].classList.contains("two")) {
+            b[0] = c[1];
+          } else {
+            b[0] = c[0];
+            b[1] = c[1];
+          }
+          let str1;
+          let str2;
+          if (b[0] && !b[0].classList.contains("none"))
+            str1 = el.className + "/" + b[0].innerHTML + "/" + 2 + "/" + 1;
+          if (b[1] && !b[1].classList.contains("none"))
+            str2 = el.className + "/" + b[1].innerHTML + "/" + 2 + "/" + 2;
+
+          if (str1) {
+            b[0].addEventListener("click", (el) => {
+              choose(str1);
+            });
+            if (init) {
+              console.log(str1, choice, choice[str1]);
+              choice[str1].td = b[0];
+            } else
+              choice[str1] = {
+                str: str1,
+                td: b[0],
+                order: false,
+                choice: false,
+                forbid: false,
+              };
+          }
+          if (str2) {
+            b[1].addEventListener("click", (el) => {
+              choose(str2);
+            });
+            if (init) {
+              choice[str2].td = b[1];
+            } else {
+              choice[str2] = {
+                str: str2,
+                td: b[1],
+                order: false,
+                choice: false,
+                forbid: false,
+              };
+            }
+          }
+        });
+
+        a2.forEach((el) => {
+          const c = el.querySelectorAll("td");
+          const b = [0, 0];
+
+          if (c[2]) {
+            b[0] = c[1];
+            b[1] = c[2];
+          } else if (c[1] && c[1].classList.contains("two")) {
+            b[0] = c[1];
+          } else {
+            b[0] = c[0];
+            b[1] = c[1];
+          }
+          let str1;
+          let str2;
+          if (b[0] && !b[0].classList.contains("none"))
+            str1 = el.className + "/" + b[0].innerHTML + "/" + 3 + "/" + 1;
+          if (b[1] && !b[1].classList.contains("none"))
+            str2 = el.className + "/" + b[1].innerHTML + "/" + 3 + "/" + 2;
+
+          if (str1) {
+            b[0].addEventListener("click", (el) => {
+              choose(str1);
+            });
+            if (init) {
+              console.log(str1, choice, choice[str1]);
+              choice[str1].td = b[0];
+            } else
+              choice[str1] = {
+                str: str1,
+                td: b[0],
+                order: false,
+                choice: false,
+                forbid: false,
+              };
+          }
+          if (str2) {
+            b[1].addEventListener("click", (el) => {
+              choose(str2);
+            });
+            if (init) {
+              choice[str2].td = b[1];
+            } else {
+              choice[str2] = {
+                str: str2,
+                td: b[1],
+                order: false,
+                choice: false,
+                forbid: false,
+              };
+            }
+          }
+        });
+
+        Object.values(choice).forEach((el) => {
+          if (el.choice) {
+            el.td.classList.add("choice");
+          }
+          if (el.forbid) {
+            el.td.classList.add("forbid");
+          }
+          if (el.order) {
+            el.td.classList.add("order");
+          }
+        });
+        Object.values(choice).forEach((el) => {
+          draw(el.str);
+        });
+
+        console.log(choice);
+      }
+      function choose(str) {
+        if (choice[str] && choice[str].forbid) {
+          error("같은 과목은 중복 이수할 수 없습니다!");
+          return "forbid";
+        }
+        if (choice[str] && choice[str].td.classList.contains("order")) {
+          console.log("hihihih");
+          const temp = order[str.split("/")[1]].join("/");
+          error(
+            `현재 과목은 이수를 위해 (${temp}) 중 하나의 이수가 필요합니다!`
+          );
+          return "order";
+        }
+        if (choice[str].choice) {
+          draw(str, false);
+          choice[str].choice = false;
+          choice[str].td.classList.remove("choice");
+
+          const a = str.split("/");
+
+          Object.values(choice).forEach((el) => {
+            if (el.str.includes(a[1]))
+              if (!el.str.includes(a[2] + "/" + a[3])) {
+                el.forbid = false;
+                el.td.classList.remove("forbid");
+              }
+          });
+        } else {
+          if (isLimit(str)) return "limit";
+          if (!isOrder(str)) return "order";
+          choice[str].choice = true;
+          choice[str].td.classList.add("choice");
+          const a = str.split("/");
+          Object.values(choice).forEach((el) => {
+            if (el.str.includes(a[1]))
+              if (!el.str.includes(a[2] + "/" + a[3])) {
+                el.forbid = true;
+                el.td.classList.remove("limit");
+                el.td.classList.add("forbid");
+              }
+          });
+        }
+        draw(str);
+
+        drawOrder();
+        localStorage.setItem("choice", JSON.stringify(choice));
+      }
+
+      function draw(str, toLimit = true) {
+        save();
+        const a = {};
+        Object.keys(choice).forEach((el) => {
+          //수정 필요! 너무 복잡함
+          if (choice[el].choice) {
+            if (!a[el.split("/")[0]]) a[el.split("/")[0]] = {};
+            if (!a[el.split("/")[0]][el.split("/")[2]])
+              a[el.split("/")[0]][el.split("/")[2]] = {};
+            if (!a[el.split("/")[0]][el.split("/")[2]][el.split("/")[3]])
+              a[el.split("/")[0]][el.split("/")[2]][el.split("/")[3]] = [];
+            a[el.split("/")[0]][el.split("/")[2]][el.split("/")[3]].unshift(
+              el.split("/")[1]
+            );
+          }
+        });
+
+        // limit 된거 표시
+        if (true) {
+          const year = str.split("/")[2];
+          const term = str.split("/")[3];
+          let tr;
+
+          console.log(year, term);
+          switch (year) {
+            case "2":
+              tr = document.querySelectorAll(
+                "table.choose.second tr." + str.split("/")[0]
+              );
+
+              break;
+            case "3":
+              tr = document.querySelectorAll(
+                "table.choose.third tr." + str.split("/")[0]
+              );
+              break;
+          }
+          tr.forEach((el) => {
+            const c = el.querySelectorAll("td");
+            const b = [0, 0];
+
+            if (c[2]) {
+              b[0] = c[1];
+              b[1] = c[2];
+            } else if (c[1] && c[1].classList.contains("two")) {
+              b[0] = c[1];
+            } else {
+              b[0] = c[0];
+              b[1] = c[1];
+            }
+            const td = b;
+            console.log(el);
+            console.log(td);
+            if (
+              td &&
+              !td[term - 1].classList.contains("forbid") &&
+              !td[term - 1].classList.contains("choice") &&
+              !td[term - 1].classList.contains("none")
+            ) {
+              if (isLimit(str, true)) td[term - 1].classList.add("limit");
+              else td[term - 1].classList.remove("limit");
+            }
+          });
+        }
+        //own 표시
+        const tr2 = document.querySelectorAll("table.own.second tr");
+        const tr3 = document.querySelectorAll("table.own.third tr");
+
+        let tempSub = "";
+        let i = 0;
+        tr2.forEach((el) => {
+          let td = Array.prototype.slice.call(el.querySelectorAll("td"));
+          if (td.length >= 3) td = td.slice(1, 3);
+
+          if (td[1] && td[1].style.display == "none") td = td.slice(0, 1);
+
+          if (el.className == tempSub) {
+            i = 1;
+          } else {
+            i = 0;
+            tempSub = el.className;
+          }
+          td.forEach((d, index) => {
+            d.innerText = "";
+            if (
+              a[el.className] &&
+              a[el.className][2] &&
+              a[el.className][2][index + 1]
+            )
+              if (i == 0) {
+                if (a[el.className][2][index + 1][0])
+                  d.innerText = a[el.className][2][index + 1][0];
+              } else if (i == 1) {
+                if (a[el.className][2][index + 1][1])
+                  d.innerText = a[el.className][2][index + 1][1];
+              }
+          });
+        });
+        tr3.forEach((el) => {
+          let td = Array.prototype.slice.call(el.querySelectorAll("td"));
+          if (td.length >= 3) td = td.slice(1, 3);
+
+          if (td[1] && td[1].style.display == "none") td = td.slice(0, 1);
+
+          if (el.className == tempSub) {
+            i++;
+          } else {
+            i = 0;
+            tempSub = el.className;
+          }
+          td.forEach((d, index) => {
+            d.innerText = "";
+            if (
+              a[el.className] &&
+              a[el.className][3] &&
+              a[el.className][3][index + 1]
+            )
+              if (a[el.className][3][index + 1][i])
+                d.innerText = a[el.className][3][index + 1][i];
+          });
+        });
+      }
+
+      let isError = false;
+      function error(msg) {
+        if (isError) return;
+        isError = true;
+        console.log("error...");
+        window.alert(msg);
+        isError = false;
+      }
+
+      function isOrder(str) {
+        let a = "";
+        Object.keys(order).forEach((el) => {
+          if (str.includes(el)) {
+            a = el;
+          }
+        });
+        if (!a) return true;
+        let ord = false;
+        Object.values(choice).forEach((el) => {
+          if (
+            el.choice &&
+            Number(el.str.split("/")[2] + el.str.split("/")[3]) <
+              Number(str.split("/")[2] + str.split("/")[3]) &&
+            order[a].includes(el.str.split("/")[1])
+          ) {
+            ord = true;
+          }
+        });
+        if (ord) return true;
+        return false;
+      }
+
+      function drawOrder() {
+        Object.keys(order).forEach((a) => {
+          let ord = false;
+          Object.keys(choice).forEach((c) => {
+            const el = choice[c];
+            if (el.str.includes(a)) {
+              if (!isOrder(el.str)) {
+                if (!el.td.classList.contains("order")) {
+                  if (el.td.classList.contains("choice")) {
+                    el.td.classList.remove("choice");
+                    choice[el.str].choice = false;
+                    draw(el.str);
+                  }
+                  el.td.classList.add("order");
+                }
+              } else {
+                if (el.td.classList.contains("order")) {
+                  el.td.classList.remove("order");
+                }
+              }
+            }
+          });
+        });
+        save();
+      }
+      drawOrder();
+      //   function reset() {
+      //     Object.keys(choice).forEach((el) => {
+      //       choice[el].choice = false;
+      //       draw();
+      //       save();
+      //     });
+      //   }
+      function save() {
+        document.querySelector("#choose-input").value = JSON.stringify({
+          data: { ...getChoiceList().a },
+          number,
+        });
+      }
+      function isLimit(str, pass = false) {
+        const subj = str.split("/")[0];
+        const year = str.split("/")[2] + "/" + str.split("/")[3];
+        let a = 0;
+
+        Object.keys(choice).forEach((el) => {
+          if (el.includes(subj) && el.includes(year) && choice[el].choice) a++;
+        });
+        if (limit[(subj + year).replace("/", "")] <= a) {
+          if (!pass)
+            error(
+              `오류! 해당 선택란은 ${
+                limit[(subj + year).replace("/", "")]
+              }이하로 선택해주세요! 선택한 과목을 다시 한번 누르면 취소할 수 있습니다.`
+            );
+          return true;
+        }
+        return false;
+      }
+
+      function getChoiceList() {
+        const a = {};
+        let i = 0;
+        Object.keys(choice).forEach((el) => {
+          //수정 필요! 너무 복잡함
+          if (choice[el].choice) {
+            if (!a[el.split("/")[0]]) a[el.split("/")[0]] = {};
+            if (!a[el.split("/")[0]][el.split("/")[2]])
+              a[el.split("/")[0]][el.split("/")[2]] = {};
+            if (!a[el.split("/")[0]][el.split("/")[2]][el.split("/")[3]])
+              a[el.split("/")[0]][el.split("/")[2]][el.split("/")[3]] = [];
+            a[el.split("/")[0]][el.split("/")[2]][el.split("/")[3]].unshift(
+              el.split("/")[1]
+            );
+            i++;
+          }
+        });
+        return { a: { ...a }, i };
+      }
+      async function submit() {
+        let { a, i } = { ...getChoiceList() };
+        console.log(a, i);
+        if (i != 21) {
+          console.log(i);
+          error("모든 과목을 선택해 주십시오!");
+          return;
+        }
+        if (number == 0) {
+          error("학번 또는 이름을 입력해주십시오!");
+          return;
+        }
+        document.querySelector("#choose-form").submit();
+      }
+    </script>
+  </body>
+</html>

@@ -12,6 +12,7 @@ const userRouter = require("./routes/user");
 const apiRouter = require("./routes/api");
 const homeRouter = require("./routes/home.js");
 const scheduleRouter = require("./routes/schedule");
+const chooseRouter = require("./routes/choose");
 const { isNotLoggedIn, isLoggedIn } = require("./routes/middlewares");
 
 const { database } = require("./mybase");
@@ -49,6 +50,7 @@ app.use("/user", userRouter);
 app.use("/home", homeRouter);
 app.use("/api", apiRouter);
 app.use("/schedule", scheduleRouter);
+app.use("/choose", chooseRouter);
 app.use("/admin", adminRouter);
 app.use("/", (req, res) => {
   return res.redirect("/home");

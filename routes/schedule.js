@@ -69,6 +69,7 @@ const jsonData3 = xlsx.utils.sheet_to_json(thirdSheet, {
   defval: "",
 });
 getInform();
+
 function getInform() {
   const list2 = {};
   const list4 = {};

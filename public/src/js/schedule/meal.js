@@ -70,11 +70,9 @@ function getList(dateJson, re = false) {
   let dateStr = "" + year + month + date; // 문자열로 변환 ex) 2022년05월22일 --> 20220522
 
   list = mealList.filter((el) => {
-    console.log(dateStr);
     return el.MLSV_YMD == dateStr;
   }); //mealList의 객체들중 MLSV_YMD란 값이 dateStr과 같은 객체만 반환하여 배열 생성
-  console.log(mealList);
-  console.log(list);
+
   for (let i = 0; i < 3; i++) {
     //급식 정보가 없다면
     if (!list[i]) {
