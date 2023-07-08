@@ -417,6 +417,23 @@
           </div>
         </table>
         <div class="reset-btn" onclick="submit()">제출</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>
+          <form action="/choose/together" method="post">
+            <input
+              type="text"
+              name="together"
+              id="together"
+              placeholder="수강을 원하는 공교를 적어주세요!"
+              style="width: 250px"
+            />
+            <input type="submit" value="공교 제출!" />
+          </form>
+        </div>
       </div>
     </div>
 
@@ -603,7 +620,6 @@
       let number = localStorage.getItem("number") | "";
       document.querySelector(".name").innerHTML =
         number + " / 이름: " + student[number];
-      console.log(choice);
 
       document.querySelector("form").addEventListener("submit", (el) => {
         el.preventDefault();
@@ -682,7 +698,6 @@
               choose(str1);
             });
             if (init) {
-              console.log(str1, choice, choice[str1]);
               choice[str1].td = b[0];
             } else
               choice[str1] = {
@@ -736,7 +751,6 @@
               choose(str1);
             });
             if (init) {
-              console.log(str1, choice, choice[str1]);
               choice[str1].td = b[0];
             } else
               choice[str1] = {
@@ -779,8 +793,6 @@
         Object.values(choice).forEach((el) => {
           draw(el.str);
         });
-
-        console.log(choice);
       }
       function choose(str) {
         if (choice[str] && choice[str].forbid) {
@@ -788,7 +800,6 @@
           return "forbid";
         }
         if (choice[str] && choice[str].td.classList.contains("order")) {
-          console.log("hihihih");
           const temp = order[str.split("/")[1]].join("/");
           error(
             `현재 과목은 이수를 위해 (${temp}) 중 하나의 이수가 필요합니다!`
@@ -810,6 +821,10 @@
               }
           });
         } else {
+          if (isScienceLimit(str)) {
+            error(`2학년에서 사회, 과학과목 중 하나를 선택해주세요!`);
+            return "limite";
+          }
           if (isLimit(str)) return "limit";
           if (!isOrder(str)) return "order";
           choice[str].choice = true;
@@ -818,6 +833,7 @@
           Object.values(choice).forEach((el) => {
             if (el.str.includes(a[1]))
               if (!el.str.includes(a[2] + "/" + a[3])) {
+                console.log(el);
                 el.forbid = true;
                 el.td.classList.remove("limit");
                 el.td.classList.add("forbid");
@@ -853,7 +869,6 @@
           const term = str.split("/")[3];
           let tr;
 
-          console.log(year, term);
           switch (year) {
             case "2":
               tr = document.querySelectorAll(
@@ -881,8 +896,6 @@
               b[1] = c[1];
             }
             const td = b;
-            console.log(el);
-            console.log(td);
             if (
               td &&
               !td[term - 1].classList.contains("forbid") &&
@@ -1003,6 +1016,13 @@
               } else {
                 if (el.td.classList.contains("order")) {
                   el.td.classList.remove("order");
+                  Object.values(choice).forEach((e) => {
+                    if (e.str.includes(el.str.split("/")[1]))
+                      if (!e.str.includes(el.str[2] + "/" + el.str[3])) {
+                        el.forbid = false;
+                        el.td.classList.remove("forbid");
+                      }
+                  });
                 }
               }
             }
@@ -1024,10 +1044,55 @@
           number,
         });
       }
+
+      function isScienceLimit(str) {
+        const subj = str.split("/")[0];
+        const year = str.split("/")[2] + "/" + str.split("/")[3];
+        let a = 0;
+        let b = 0;
+        let c = 0;
+        Object.keys(choice).forEach((el) => {
+          if (el.includes(subj) && el.includes(year) && choice[el].choice) a++;
+          if (
+            el.includes(subj) &&
+            el.includes(str.split("/")[2]) &&
+            choice[el].choice
+          )
+            c++;
+          if (
+            el.includes("scienceS") &&
+            (el.includes("2/1") || el.includes("2/2"))
+          ) {
+            console.log(b);
+            if (choice[el].choice) {
+              if (el.includes("학")) {
+                b++;
+              }
+            }
+          }
+        });
+
+        console.log(a);
+
+        if (c >= 3 && str.split("/")[0] === "scienceS") {
+          if (year == "2/1" || year == "2/2") {
+            if (
+              (b >= 3 && str.split("/")[1].includes("학")) ||
+              (b <= 0 && !str.split("/")[1].includes("학"))
+            ) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
       function isLimit(str, pass = false) {
         const subj = str.split("/")[0];
         const year = str.split("/")[2] + "/" + str.split("/")[3];
         let a = 0;
+        let b = 0;
+        let c = 0;
 
         Object.keys(choice).forEach((el) => {
           if (el.includes(subj) && el.includes(year) && choice[el].choice) a++;
@@ -1065,9 +1130,8 @@
       }
       async function submit() {
         let { a, i } = { ...getChoiceList() };
-        console.log(a, i);
+
         if (i != 21) {
-          console.log(i);
           error("모든 과목을 선택해 주십시오!");
           return;
         }
