@@ -33,7 +33,8 @@ router.post("/", async (req, res) => {
 
 router.post("/together", (req, res) => {
   const hi = req.body.together;
-  if (together[hi]) {
+  console.log(together[hi]);
+  if (together[hi] != undefined) {
     together[hi] = together[hi] + 1;
   } else {
     together[hi] = 0;
