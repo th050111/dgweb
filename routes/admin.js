@@ -298,6 +298,56 @@ function writeChooseToExel() {
       });
     });
   });
+
+  Object.keys(choose).forEach((el, i) => {
+    const data = choose[el];
+    const sheet = workbook.Sheets[sheetNames[4]];
+    Object.keys(data).forEach((subj) => {
+      Object.keys(data[subj]).forEach((year) => {
+        Object.keys(data[subj][year]).forEach((term) => {
+          const choices = data[subj][year][term];
+          choices.forEach((choice, index) => {
+            let str = `${year}/${term} `;
+            if (choices.length == 1) {
+              str += a[subj];
+            } else if (choices.length >= 2) {
+              str += a[subj] + "-" + (index + 1);
+            }
+            if (!str) return;
+            const rowName = getRowName(str, sheet);
+            sheet["!ref"] = "A1:Z" + (2 + i);
+            sheet[rowName + (2 + i)] = {
+              h: choice,
+              w: choice,
+              v: choice,
+              t: "s",
+            };
+            sheet["A" + (2 + i)] = {
+              h: el,
+              w: el,
+              v: el,
+              t: "s",
+            };
+            sheet["B" + (2 + i)] = {
+              h: student[el],
+              w: student[el],
+              v: student[el],
+              t: "s",
+            };
+            if (term == "1" && (subj === "artS" || subj === "languageS")) {
+              str.replace(year + "/" + term, year + "/" + (Number(term) + 1));
+              sheet[getRowName(str, sheet) + (2 + i)] = {
+                h: choice,
+                w: choice,
+                v: choice,
+                t: "s",
+              };
+            }
+          });
+        });
+      });
+    });
+  });
   const timeStamp = +new Date();
   xlsx.writeFile(workbook, "choose" + timeStamp + ".xlsx");
   return timeStamp;
