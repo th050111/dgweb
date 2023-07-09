@@ -417,6 +417,9 @@
           </div>
         </table>
         <div class="reset-btn" onclick="submit()">제출</div>
+        <div class="reset-btn" onclick="reset()" style="margin-right: 100px">
+          초기화
+        </div>
         <br />
         <br />
         <br />
@@ -424,6 +427,12 @@
         <br />
         <div>
           <form action="/choose/together" method="post">
+            <label for="together"
+              >수강을 원하는 공교가
+              <br />
+              있다면 적어주세요!(필수x)</label
+            >
+            <br />
             <input
               type="text"
               name="together"
@@ -431,6 +440,7 @@
               placeholder="수강을 원하는 공교를 적어주세요!"
               style="width: 250px"
             />
+            <br />
             <input type="submit" value="공교 제출!" />
           </form>
         </div>
@@ -822,7 +832,7 @@
           });
         } else {
           if (isScienceLimit(str)) {
-            error(`2학년에서 사회, 과학과목 중 하나를 선택해주세요!`);
+            error(`2학년과 3학년에서 사회, 과학과목 중 하나를 선택해주세요!`);
             return "limite";
           }
           if (isLimit(str)) return "limit";
@@ -1031,13 +1041,10 @@
         save();
       }
       drawOrder();
-      //   function reset() {
-      //     Object.keys(choice).forEach((el) => {
-      //       choice[el].choice = false;
-      //       draw();
-      //       save();
-      //     });
-      //   }
+      function reset() {
+        localStorage.removeItem("choice");
+        location.reload();
+      }
       function save() {
         document.querySelector("#choose-input").value = JSON.stringify({
           data: { ...getChoiceList().a },
@@ -1053,15 +1060,11 @@
         let c = 0;
         Object.keys(choice).forEach((el) => {
           if (el.includes(subj) && el.includes(year) && choice[el].choice) a++;
-          if (
-            el.includes(subj) &&
-            el.includes(str.split("/")[2]) &&
-            choice[el].choice
-          )
+          if (el.includes(subj) && !el.includes("3/2") && choice[el].choice)
             c++;
           if (
             el.includes("scienceS") &&
-            (el.includes("2/1") || el.includes("2/2"))
+            (el.includes("2/1") || el.includes("2/2") || el.includes("3/1"))
           ) {
             console.log(b);
             if (choice[el].choice) {
@@ -1074,10 +1077,10 @@
 
         console.log(a);
 
-        if (c >= 3 && str.split("/")[0] === "scienceS") {
-          if (year == "2/1" || year == "2/2") {
+        if (c >= 5 && str.split("/")[0] === "scienceS") {
+          if (year == "2/1" || year == "2/2" || year == "3/1") {
             if (
-              (b >= 3 && str.split("/")[1].includes("학")) ||
+              (b >= 5 && str.split("/")[1].includes("학")) ||
               (b <= 0 && !str.split("/")[1].includes("학"))
             ) {
               return true;
