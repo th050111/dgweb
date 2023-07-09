@@ -1058,7 +1058,18 @@
         let a = 0;
         let b = 0;
         let c = 0;
+        let d = 0;
         Object.keys(choice).forEach((el) => {
+          if (
+            el.includes("scienceS") &&
+            (el.includes("2/1") || el.includes("2/2") || el.includes("3/1"))
+          ) {
+            if (choice[el].choice) {
+              if (el.includes("빅데이터")) {
+                c++;
+              }
+            }
+          }
           if (el.includes(subj) && el.includes(year) && choice[el].choice) a++;
           if (el.includes(subj) && !el.includes("3/2") && choice[el].choice)
             c++;
@@ -1080,7 +1091,9 @@
         if (c >= 5 && str.split("/")[0] === "scienceS") {
           if (year == "2/1" || year == "2/2" || year == "3/1") {
             if (
-              (b >= 5 && str.split("/")[1].includes("학")) ||
+              (b + d >= 5 &&
+                (str.split("/")[1].includes("학") ||
+                  str.split("/")[1].includes("빅데이터"))) ||
               (b <= 0 && !str.split("/")[1].includes("학"))
             ) {
               return true;
