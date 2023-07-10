@@ -634,11 +634,6 @@
       document.querySelector("form").addEventListener("submit", (el) => {
         el.preventDefault();
         number = el.target.number.value;
-        if (!isNaN(Number(number))) {
-          number = 0;
-          window.alert("제대로된 학번을 입력해주세요");
-          return;
-        }
         if (!isNaN(Number(number)) && number.length == 4)
           number = number[0] + "0" + number[1] + number[2] + number[3];
 
@@ -1052,9 +1047,15 @@
       drawOrder();
       function reset() {
         localStorage.removeItem("choice");
+        localStorage.removeItem("number");
         location.reload();
       }
       function save() {
+        // if (isNaN(Number(number))) {
+        //   window.alert("제대로된 학번을 입력하세요");
+        //   localStorage.removeItem("number");
+        //   location.reload();
+        // }
         document.querySelector("#choose-input").value = JSON.stringify({
           data: { ...getChoiceList().a },
           number,
