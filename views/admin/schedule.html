@@ -1,13 +1,13 @@
 {% extends 'admin/layout.html' %} {%block content%}
 
 <form action="/api/snack" method="post" enctype="multipart/form-data">
-  <label for="img"></label>
+  <label for="img">간식!</label>
   <input type="file" id="image" name="image" , accept="image/*" />
   <input type="submit" value="제출" />
 </form>
 
 <form action="/api/notice" method="post" enctype="multipart/form-data">
-  <label for="img"></label>
+  <label for="img">급식표!</label>
   <input type="file" id="notice" name="notice" , accept="image/*" />
   <input type="submit" value="제출" />
 </form>
