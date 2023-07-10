@@ -313,22 +313,24 @@ function writeChooseToExel() {
             } else if (choices.length >= 2) {
               str += a[subj] + "-" + (index + 1);
             }
+
             if (!str) return;
-            const rowName = getRowName(str, sheet);
-            sheet["!ref"] = "A1:Z" + (2 + i);
-            sheet[rowName + (2 + i)] = {
+            const rowName = getRowName(str, sheet, true);
+            console.log(str, rowName, choice);
+            sheet["!ref"] = "A1:Z" + (3 + i);
+            sheet[rowName + (3 + i)] = {
               h: choice,
               w: choice,
               v: choice,
               t: "s",
             };
-            sheet["A" + (2 + i)] = {
+            sheet["A" + (3 + i)] = {
               h: el,
               w: el,
               v: el,
               t: "s",
             };
-            sheet["B" + (2 + i)] = {
+            sheet["B" + (3 + i)] = {
               h: student[el],
               w: student[el],
               v: student[el],
@@ -353,13 +355,14 @@ function writeChooseToExel() {
   return timeStamp;
 }
 
-function getRowName(str, sheet) {
+function getRowName(str, sheet, a = false) {
   let result;
 
   Object.keys(sheet).forEach((el) => {
     // console.log(sheet[el].v);
     if (sheet[el].v == str) {
       result = el.replace("1", "");
+      if (a) result = el.replace("2", "");
     }
   });
   return result;
