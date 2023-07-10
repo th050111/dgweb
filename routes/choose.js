@@ -17,7 +17,7 @@ async function loadTogether() {
 }
 
 function updateTogether() {
-  db.collection("choose2").doc("together").update(together);
+  db.collection("choose2").doc("together").set(together);
 }
 
 router.post("/", async (req, res) => {
