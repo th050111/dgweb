@@ -627,12 +627,21 @@
         0: "입력해주세요",
       };
     </script>
+    <script></script>
     <script>
       let choice = JSON.parse(localStorage.getItem("choice"));
       let number = localStorage.getItem("number") | "";
+      let submitList = {};
       document.querySelector(".name").innerHTML =
         number + " / 이름: " + student[number];
 
+      function getChoose() {
+        axios.get("/admin/choose/inform").then((res) => {
+          submitList = res.data.choose;
+          drawSubmit();
+        });
+      }
+      getChoose();
       document.querySelector("form").addEventListener("submit", (el) => {
         el.preventDefault();
         number = el.target.number.value;
@@ -651,6 +660,7 @@
           }
         }
         localStorage.setItem("number", number);
+        drawSubmit();
         save();
         document.querySelector(".name").innerHTML =
           number + " / 이름: " + student[number];
@@ -684,7 +694,6 @@
         과학과제연구: ["물리학Ⅱ", "생명과학Ⅱ", "화학Ⅱ", "지구과학Ⅱ"],
         사회문제탐구: ["사회문화", "경제", "정치와법"],
       };
-
       if (!choice) choiceInit(false);
       else choiceInit(true);
       function choiceInit(init) {
@@ -862,7 +871,19 @@
         localStorage.setItem("choice", JSON.stringify(choice));
       }
 
+      function drawSubmit() {
+        let isSubmit = false;
+        Object.keys(submitList).forEach((el) => {
+          if (number == el) isSubmit = true;
+        });
+        if (isSubmit) {
+          document.querySelector("#hi").innerHTML = "제출 됨";
+        } else {
+          document.querySelector("#hi").innerHTML = "제출 안 됨";
+        }
+      }
       function draw(str, toLimit = true) {
+        drawSubmit();
         save();
         const a = {};
         Object.keys(choice).forEach((el) => {
