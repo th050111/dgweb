@@ -1,11 +1,11 @@
 const schedule = [
-  ["A*", "D*", "C", "D", "A"],
-  ["B", "F", "B*", "A*", "D"],
-  ["F", "B", "D", "B", "C*"],
-  ["C", "C", "A", "C", "F"],
-  ["B*", "C*", "F", "A", "창"],
-  ["E", "A", "D*", "E", "창"],
-  ["E", "D", "B", "E", "창"],
+  ["D", "음미", "수", "중일", "C"],
+  ["B", "중일", "자", "B", "체"],
+  ["B", "A", "D", "B", "D"],
+  ["수", "D", "A", "A", "수"],
+  ["A", "자", "한", "자", "?"],
+  ["체", "C", "자", "자", "??"],
+  ["자", "수", "C", "C", "???"],
 ];
 let number = localStorage.getItem("number") | "";
 (function () {
@@ -126,7 +126,7 @@ function draw() {
           let a = schedule[i - 1][j - 1]; //시간표 세트가져오기
 
           //4단위라면
-          if (a.length == 1) {
+          if (true || a.length == 1) {
             if (list4[number][whatSet(4, a)]) {
               const subj = list4[number][whatSet(4, a)];
               const div = document.createElement("div");
@@ -137,11 +137,19 @@ function draw() {
               td.append(div);
               td.classList.add(a);
               // if (day == j) td.classList.add("today");
+            } else {
+               const subj = a;
+              const div = document.createElement("div");
+              div.innerHTML =
+                subj + "<br/>" + "(" + whoTeacher(subj, whatSet(4, a)) + "T)";
+              div.title = "위치: " + where[whoTeacher(subj, whatSet(4, a))];
+              td.innerText = "";
+              td.append(div);
+              td.classList.add(a);
             }
           }
-
           //2단위라면
-          if (a.length == 2) {
+          else if (a.length == 2) {
             a = a.replace("*", "");
             let tch, wh, subH;
             if (list2[number][whatSet(2, a)].includes("미감")) {
