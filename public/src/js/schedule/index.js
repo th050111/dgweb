@@ -1,4 +1,4 @@
-const schedule_list = ["1":[
+const schedule_list = {"1":[
   ["D", "자", "체", "한", "C"],
   ["B", "자", "자", "B", "수"],
   ["B", "A", "D", "B", "D"],
@@ -62,7 +62,7 @@ const schedule_list = ["1":[
   ["A", "한", "자", "자", "?"],
   ["수", "C", "중일", "중일", "??"],
   ["자", "체", "C", "C", "???"],
-]];
+]};
 let number = localStorage.getItem("number") | "";
 (function () {
   initData(() => {
