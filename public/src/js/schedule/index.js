@@ -179,7 +179,7 @@ function draw() {
       const td = tr.querySelectorAll("td");
       td.forEach((td, j) => {
         if (j != 0) {
-          let a = schedule_list[number[2]][i - 1][j - 1]; //시간표 세트가져오기
+          let a = schedule_list[String(number)[2]][i - 1][j - 1]; //시간표 세트가져오기
 
           //4단위라면
           if (true || a.length == 1) {
